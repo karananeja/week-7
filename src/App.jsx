@@ -1,5 +1,5 @@
 import { RecoilRoot, useRecoilValue, useSetRecoilState } from 'recoil';
-import { countAtom } from './store/atoms/count';
+import { countAtom, evenNumber } from './store/atoms/count';
 
 function App() {
   // wrap anyone that wants to use the teleported value inside a provider
@@ -22,7 +22,17 @@ function Count() {
 
 function CountRenderer() {
   const count = useRecoilValue(countAtom);
-  return <div>{count}</div>;
+  return (
+    <div>
+      {count}
+      <EvenCountRenderer />
+    </div>
+  );
+}
+
+function EvenCountRenderer() {
+  const count = useRecoilValue(evenNumber);
+  return <div>{count === 0 ? 'It is even' : 'It is odd'}</div>;
 }
 
 function Buttons() {
